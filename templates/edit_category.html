@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Category</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <div class="container" style="max-width:500px;">
+
+        <h1>✏️ Edit Category</h1>
+
+        <form method="POST">
+            <input type="text" name="name" value="{{ category.name }}" required>
+            <button type="submit" class="btn-export" style="margin-top:12px;">✅ Update</button>
+        </form>
+
+        <div class="back-link">
+            <a href="/categories">⬅ Back</a>
+        </div>
+
+    </div>
+
+</body>
+
+</html>

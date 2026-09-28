@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Email Verification</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <div class="container" style="max-width:420px;">
+        <h1>📧 Verify Email</h1>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% for category, message in messages %}
+        <div class="{{ 'flash-success' if category=='success' else 'flash-error' }}">
+            {{ message }}
+        </div>
+        {% endfor %}
+        {% endwith %}
+
+        <form method="POST">
+            <input type="email" name="email" placeholder="Email" required>
+            <input type="text" name="otp" placeholder="Enter OTP" required>
+            <button class="btn-export">Verify</button>
+        </form>
+    </div>
+
+</body>
+
+</html>

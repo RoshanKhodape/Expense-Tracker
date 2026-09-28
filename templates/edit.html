@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Edit Expense</title>
+
+    <!-- ✅ Main CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <div class="container" style="max-width:650px;">
+
+        <h1 style="margin-bottom:10px;">✏️ Edit Expense</h1>
+        <p class="welcome" style="margin-bottom:18px;">Update details and save changes ✅</p>
+
+        <!-- Flash Messages -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        {% for category, message in messages %}
+        <div class="{{ 'flash-success' if category=='success' else 'flash-error' }}">
+            {{ message }}
+        </div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+
+        <form method="POST">
+
+            <div class="form-group" style="margin-bottom:14px;">
+                <label>Date</label>
+                <input type="date" name="date" value="{{ expense['date'] }}" required>
+            </div>
+
+            <div class="form-group" style="margin-bottom:14px;">
+                <label>Category</label>
+                <input type="text" name="category" value="{{ expense['category'] }}" required>
+            </div>
+
+            <div class="form-group" style="margin-bottom:14px;">
+                <label>Amount</label>
+                <input type="number" name="amount" value="{{ expense['amount'] }}" required>
+            </div>
+
+            <div class="form-group" style="margin-bottom:14px;">
+                <label>Note</label>
+                <input type="text" name="note" value="{{ expense['note'] }}">
+            </div>
+
+            <button type="submit" class="btn-export" style="width:100%;">
+                ✅ Update Expense
+            </button>
+
+        </form>
+
+        <div class="back-link" style="margin-top:18px;">
+            <a href="/view">⬅ Back to Expenses</a>
+        </div>
+
+    </div>
+
+</body>
+
+</html>

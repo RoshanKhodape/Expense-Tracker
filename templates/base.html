@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Expense Tracker{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script>
+        function toggleTheme() {
+            document.body.classList.toggle("light-mode");
+            localStorage.setItem(
+                "theme",
+                document.body.classList.contains("light-mode") ? "light" : "dark"
+            );
+        }
+
+        window.onload = function () {
+            if (localStorage.getItem("theme") === "light") {
+                document.body.classList.add("light-mode");
+            }
+        };
+    </script>
+</head>
+
+<body>
+
+    <!-- THEME TOGGLE BUTTON -->
+    <div class="theme-toggle">
+        <button onclick="toggleTheme()">🌗</button>
+    </div>
+
+    <!-- FLASH MESSAGES -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    {% for category, message in messages %}
+    <div class="{{ 'flash-success' if category=='success' else 'flash-error' }}">
+        {{ message }}
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+
+    <!-- MAIN CONTENT -->
+    <div class="container">
+        {% block content %}{% endblock %}
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        © 2026 Expense Tracker • Built with Flask ❤️
+    </footer>
+</body>
+
+</html>

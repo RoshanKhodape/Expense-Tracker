@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>All Expenses</title>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #0f172a;
+            /* dark navy black */
+            color: #e5e7eb;
+            margin: 0;
+            padding: 0;
+        }
+
+
+        .container {
+            max-width: 1000px;
+            margin: 60px auto;
+            background: #111827;
+            /* dark card */
+            padding: 30px;
+            border-radius: 14px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+        }
+
+        h2 {
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            border-radius: 10px;
+            overflow: hidden;
+            background: #020617;
+        }
+
+        thead {
+            background: #1e293b;
+            color: #e5e7eb;
+        }
+
+
+        th,
+        td {
+            padding: 12px;
+            text-align: left;
+        }
+
+        tbody tr:nth-child(even) {
+            background: #020617;
+        }
+
+        tbody tr:hover {
+            background: #1e293b;
+        }
+
+        .amount {
+            font-weight: bold;
+            color: #28a745;
+        }
+
+        .total {
+            margin-top: 25px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .back {
+            margin-top: 25px;
+        }
+
+        .back a {
+            text-decoration: none;
+            color: #007bff;
+            font-weight: bold;
+        }
+
+        .back a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+
+            table,
+            thead,
+            tbody,
+            th,
+            td,
+            tr {
+                display: block;
+            }
+
+            thead {
+                display: none;
+            }
+
+            tbody tr {
+                margin-bottom: 15px;
+                background: #fff;
+                border-radius: 10px;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+                padding: 15px;
+            }
+
+            td {
+                padding: 6px 0;
+            }
+
+            td::before {
+                content: attr(data-label);
+                font-weight: bold;
+                display: block;
+                color: #555;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% for category, message in messages %}
+    <div class="flash-success">
+        {{ message }}
+    </div>
+    {% endfor %}
+    {% endwith %}
+
+    <div class="container">
+        <h2>📋 All Expenses</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Amount</th>
+                    <th>Category</th>
+                    <th>Note</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for e in expenses %}
+                <tr>
+                    <td data-label="Date">{{ e.date }}</td>
+                    <td data-label="Amount" class="amount">{{ currency_symbol }} {{ e.amount }}</td>
+                    <td data-label="Category">{{ e.category }}</td>
+                    <td data-label="Note">{{ e.note }}</td>
+                    <td data-label="Actions">
+                        <a href="/edit/{{ e.id }}" class="action-edit">✏️</a>
+                        &nbsp;&nbsp;
+                        <a href="/delete/{{ e.id }}" class="action-delete"
+                            onclick="return confirm('Delete this expense?')">🗑️</a>
+                    </td>
+
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <div class="total">
+            💰 Total Spent: {{ currency_symbol }} {{ total }}
+        </div>
+
+        <div class="back">
+            <a href="/">⬅ Back to Dashboard</a>
+        </div>
+    </div>
+
+</body>
+
+</html>

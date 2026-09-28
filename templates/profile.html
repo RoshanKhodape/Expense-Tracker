@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Profile Settings</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <div class="container" style="max-width:520px;">
+        <h1>👤 Profile Settings</h1>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% for category, message in messages %}
+        <div class="{{ 'flash-success' if category=='success' else 'flash-error' }}">
+            {{ message }}
+        </div>
+        {% endfor %}
+        {% endwith %}
+
+        <form method="POST">
+
+            <label>Username</label>
+            <input type="text" name="username" value="{{ user['username'] }}">
+
+            <label>Email</label>
+            <input type="text" value="{{ user['email'] }}" disabled>
+
+            <label>Old Password</label>
+            <input type="password" name="old_password" required>
+
+            <label>New Password</label>
+            <input type="password" name="new_password">
+
+            <br>
+            <button class="btn-export">Update Profile</button>
+        </form>
+
+        <div class="back-link">
+            <a href="/">← Back to Dashboard</a>
+        </div>
+    </div>
+
+</body>
+
+</html>

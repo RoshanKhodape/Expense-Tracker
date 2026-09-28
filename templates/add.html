@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Add Expense</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <div class="container" style="max-width:650px;">
+
+        <h1 style="margin-bottom:10px;">➕ Add New Expense</h1>
+        <p class="welcome" style="margin-bottom:18px;">Fill details and save your expense ✅</p>
+
+        <!-- Flash Messages -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        {% for category, message in messages %}
+        <div class="{{ 'flash-success' if category=='success' else 'flash-error' }}">
+            {{ message }}
+        </div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+
+        <form method="POST" action="{{ url_for('add_expense') }}">
+
+            <div class="form-group" style="margin-bottom:14px;">
+                <label>Date</label>
+                <input type="date" name="date" required>
+            </div>
+
+            <div class="form-group" style="margin-bottom:14px;">
+                <label>Category</label>
+                <select name="category" required>
+                    <option value="">-- Select Category --</option>
+                    {% for c in categories %}
+                    <option value="{{ c.name }}">{{ c.name }}</option>
+                    {% endfor %}
+                </select>
+
+                <div style="margin-top:8px;">
+                    <a href="/categories" style="color:#93c5fd; text-decoration:none; font-weight:600;">
+                        ➕ Manage Categories
+                    </a>
+                </div>
+            </div>
+
+            <div class="form-group" style="margin-bottom:14px;">
+                <label>Amount</label>
+                <input type="number" name="amount" placeholder="Enter amount" required>
+            </div>
+
+            <div class="form-group" style="margin-bottom:14px;">
+                <label>Note (Optional)</label>
+                <input type="text" name="note" placeholder="Optional note">
+            </div>
+
+            <button class="btn-export" type="submit" style="width:100%;">
+                💾 Save Expense
+            </button>
+
+        </form>
+
+        <div class="back-link" style="margin-top:18px;">
+            <a href="/">⬅ Back to Dashboard</a>
+        </div>
+
+    </div>
+
+</body>
+
+</html>

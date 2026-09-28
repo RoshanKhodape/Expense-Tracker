@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>404 - Page Not Found</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <style>
+        .error-wrap {
+            min-height: 85vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .error-card {
+            width: 100%;
+            max-width: 520px;
+            padding: 28px;
+            border-radius: 18px;
+            background: linear-gradient(145deg, #1f2937, #111827);
+            box-shadow: 0 18px 50px rgba(0, 0, 0, 0.55);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            text-align: center;
+        }
+
+        .error-code {
+            font-size: 70px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            margin: 0;
+            color: #60a5fa;
+            text-shadow: 0 10px 30px rgba(96, 165, 250, 0.25);
+        }
+
+        .error-title {
+            margin: 10px 0 6px;
+            font-size: 22px;
+            color: #f9fafb;
+        }
+
+        .error-text {
+            margin: 0 0 20px;
+            color: #9ca3af;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .error-actions {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 18px;
+        }
+
+        .btn-dark {
+            display: inline-block;
+            padding: 12px 16px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 14px;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            background: rgba(0, 0, 0, 0.2);
+            color: #e5e7eb;
+            transition: 0.2s;
+        }
+
+        .btn-dark:hover {
+            transform: translateY(-2px);
+            background: rgba(255, 255, 255, 0.06);
+        }
+
+        .btn-primary {
+            border: none;
+            background: linear-gradient(135deg, #34d399, #60a5fa);
+            color: #0b1220;
+            box-shadow: 0 12px 25px rgba(52, 211, 153, 0.18);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="error-wrap">
+        <div class="error-card">
+            <h1 class="error-code">404</h1>
+            <div class="error-title">Page Not Found 😅</div>
+            <p class="error-text">
+                Sorry bro, this page is not available or the link is incorrect.
+            </p>
+
+            <div class="error-actions">
+                <a class="btn-dark btn-primary" href="/">⬅ Back to Dashboard</a>
+                <a class="btn-dark" href="/login">🔐 Login</a>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restore Backup</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <div class="container" style="max-width:520px;">
+
+        <h1>📦 Restore Backup</h1>
+        <p class="welcome">Upload your backup DB file (.db)</p>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        {% for category, message in messages %}
+        <div class="{{ 'flash-success' if category=='success' else 'flash-error' }}">
+            {{ message }}
+        </div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+
+        <form method="POST" enctype="multipart/form-data">
+            <label style="display:block;margin-bottom:8px;font-weight:600;">Select Backup File</label>
+
+            <input type="file" name="backup_file" accept=".db" required style="margin-bottom:15px;">
+
+            <button type="submit" class="btn-export" style="width:100%;">
+                ♻️ Restore Backup
+            </button>
+        </form>
+
+        <div class="back-link" style="margin-top:18px;">
+            <a href="/">⬅ Back to Dashboard</a>
+        </div>
+
+    </div>
+
+</body>
+
+</html>

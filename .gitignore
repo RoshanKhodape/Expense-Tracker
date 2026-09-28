@@ -1,0 +1,38 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environment
+venv/
+.venv/
+env/
+
+# Secrets
+.env
+.env.*
+
+# SQLite database
+app.db
+*.db
+*.sqlite
+*.sqlite3
+
+# SQLite Browser
+*.sqbpro
+
+# Generated files
+*.pdf
+backups/
+static/reports/
+
+# VS Code
+.vscode/
+
+# PyCharm
+.idea/
+
+# OS
+Thumbs.db
+.DS_Store

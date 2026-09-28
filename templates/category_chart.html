@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Category-wise Expense Chart</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #0f172a;
+            /* dark navy black */
+            color: #e5e7eb;
+            margin: 0;
+            padding: 0;
+        }
+
+
+        .container {
+            max-width: 1000px;
+            margin: 60px auto;
+            background: #111827;
+            /* dark card */
+            padding: 30px;
+            border-radius: 14px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+        }
+
+
+        canvas {
+            margin-top: 20px;
+        }
+
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            text-decoration: none;
+            color: #007bff;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h2>🥧 Category-wise Expense Distribution</h2>
+
+        <canvas id="pieChart"></canvas>
+
+        <a href="/">⬅ Back to Dashboard</a>
+    </div>
+
+    <script>
+        const categories = {{ categories | tojson | safe }};
+        const totals = {{ totals | tojson | safe }};
+
+        if (categories.length === 0) {
+            alert("No expense data found!");
+        } else {
+            new Chart(document.getElementById("pieChart"), {
+                type: "pie",
+                data: {
+                    labels: categories,
+                    datasets: [{
+                        data: totals,
+                        backgroundColor: [
+                            "#007bff",
+                            "#28a745",
+                            "#ffc107",
+                            "#dc3545",
+                            "#6f42c1",
+                            "#20c997"
+                        ]
+                    }]
+                },
+                options: {
+                    responsive: true
+                }
+            });
+        }
+    </script>
+
+</body>
+
+</html>

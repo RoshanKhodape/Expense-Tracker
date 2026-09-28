@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Export PDF (Date Range)</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+
+<body>
+
+    <div class="container glass-form">
+        <h1 class="page-title">
+            <i class="fa-solid fa-file-pdf"></i>
+            Export PDF
+        </h1>
+        <p class="subtitle">Select date range to generate your expense report</p>
+
+        <form method="POST" action="/export-pdf-preview" class="date-form">
+
+
+            <div class="input-group">
+                <label>From Date</label>
+                <input type="date" name="start_date" required>
+            </div>
+
+            <div class="input-group">
+                <label>To Date</label>
+                <input type="date" name="end_date" required>
+            </div>
+
+            <button type="submit" class="btn-export">
+                <i class="fa-solid fa-download"></i> Export PDF
+            </button>
+        </form>
+
+        <div class="back-link">
+            <a href="/">⬅ Back to Dashboard</a>
+        </div>
+    </div>
+
+</body>
+
+</html>

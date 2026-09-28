@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>PDF Preview</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<div class="container glass-form">
+
+    <h1 class="page-title">📄 PDF Preview</h1>
+    <p class="subtitle">Review your expense report before downloading</p>
+
+    <div class="pdf-preview-box">
+        <iframe src="/{{ pdf_file }}" frameborder="0"></iframe>
+    </div>
+
+    <a href="/{{ pdf_file }}" download class="btn-export">
+        ⬇ Download PDF
+    </a>
+
+    <div class="back-link">
+        <a href="/export-pdf-range">⬅ Change Date Range</a>
+    </div>
+
+</div>
+
+</body>
+</html>

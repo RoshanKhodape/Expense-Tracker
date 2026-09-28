@@ -1,0 +1,463 @@
+/* ===============================
+   GLOBAL – SOFT DARK
+================================ */
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: #111827;
+    /* soft dark */
+    color: #e5e7eb;
+    margin: 0;
+    padding: 0;
+    line-height: 1.4;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* ===============================
+   MAIN CONTAINER
+================================ */
+.container {
+    max-width: 1000px;
+    width: 95%;
+    margin: 14px auto;
+    background: #1f2937;
+    /* dark gray */
+    padding: 16px;
+    border-radius: 16px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+}
+
+/* ===============================
+   TEXT
+================================ */
+h1 {
+    color: #f9fafb;
+}
+
+h3 {
+    color: #cbd5f5;
+}
+
+.welcome {
+    color: #9ca3af;
+    margin-bottom: 30px;
+}
+
+/* ===============================
+   SUMMARY CARDS (PREMIUM)
+================================ */
+.summary-cards {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+}
+
+.summary-card {
+    flex: 1;
+    min-width: 220px;
+    padding: 22px;
+    border-radius: 16px;
+    background: linear-gradient(145deg, #1f2937, #111827);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+
+.summary-card h3 {
+    font-size: 14px;
+    color: #9ca3af;
+}
+
+.summary-card h1 {
+    margin-top: 12px;
+    font-size: 22px;
+}
+
+/* Accent colors */
+.blue h1 {
+    color: #60a5fa;
+}
+
+.green h1 {
+    color: #34d399;
+}
+
+.orange h1 {
+    color: #fb923c;
+}
+
+/* ===============================
+   ACTION CARDS
+================================ */
+.actions {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 22px;
+}
+
+.action-card {
+    background: #111827;
+    padding: 18px;
+    border-radius: 14px;
+    text-align: center;
+    box-shadow: inset 0 0 0 1px #1f2937,
+        0 8px 20px rgba(0, 0, 0, 0.4);
+    transition: all 0.25s ease;
+}
+
+.action-card:hover {
+    transform: translateY(-6px);
+    background: #1f2937;
+}
+
+.action-icon {
+    font-size: 32px;
+    margin-bottom: 12px;
+}
+
+.action-card a {
+    text-decoration: none;
+    color: #93c5fd;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+/* ===============================
+   LOGOUT & FOOTER
+================================ */
+.logout {
+    margin-top: 35px;
+    text-align: right;
+}
+
+.logout a {
+    color: #f87171;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.footer {
+    text-align: center;
+    margin-top: 40px;
+    color: #9ca3af;
+    font-size: 14px;
+}
+
+/* ===============================
+   FLASH MESSAGES
+================================ */
+/* ===============================
+   FLASH MESSAGES (FIXED DESIGN)
+================================ */
+.flash-success,
+.flash-error {
+    width: 100%;
+    padding: 12px 14px;
+    border-radius: 12px;
+    margin-bottom: 18px;
+    font-size: 14px;
+    font-weight: 600;
+
+    /* ✅ Small clean alert look */
+    background: rgba(0, 0, 0, 0.35);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+/* ✅ SUCCESS */
+.flash-success {
+    border-left: 4px solid #34d399;
+    color: #34d399;
+}
+
+/* ✅ ERROR */
+.flash-error {
+    border-left: 4px solid #f87171;
+    color: #f87171;
+}
+
+.flash-area {
+    margin-top: 12px;
+}
+
+/* ===============================
+   THEME TOGGLE BUTTON
+================================ */
+.theme-toggle {
+    position: fixed;
+    top: 20px;
+    right: 25px;
+    z-index: 1000;
+}
+
+.theme-toggle button {
+    background: #1f2937;
+    color: #f9fafb;
+    border: none;
+    padding: 10px 14px;
+    border-radius: 50%;
+    font-size: 18px;
+    cursor: pointer;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
+    transition: all 0.3s ease;
+}
+
+.theme-toggle button:hover {
+    transform: scale(1.1);
+    background: #374151;
+}
+
+/* ===============================
+   LIGHT MODE
+================================ */
+body.light-mode {
+    background: #f4f6f8;
+    color: #111827;
+}
+
+body.light-mode .container {
+    background: #ffffff;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+body.light-mode h1,
+body.light-mode h3 {
+    color: #111827;
+}
+
+body.light-mode .welcome {
+    color: #555;
+}
+
+body.light-mode .summary-card {
+    background: #f9fafb;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+body.light-mode .summary-card h3 {
+    color: #6b7280;
+}
+
+body.light-mode .action-card {
+    background: #ffffff;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+body.light-mode .action-card a {
+    color: #2563eb;
+}
+
+body.light-mode .logout a {
+    color: #dc2626;
+}
+
+/* ===============================
+   EXPORT PDF – GLASS FORM
+================================ */
+
+.glass-form {
+    max-width: 420px;
+    margin: 90px auto;
+    padding: 35px;
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-radius: 18px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.45);
+    text-align: center;
+}
+
+.page-title {
+    font-size: 26px;
+    margin-bottom: 6px;
+}
+
+.page-title i {
+    color: #ef4444;
+}
+
+.subtitle {
+    font-size: 14px;
+    color: #94a3b8;
+    margin-bottom: 30px;
+}
+
+/* INPUTS */
+.date-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.input-group {
+    text-align: left;
+}
+
+.input-group label {
+    font-size: 13px;
+    color: #cbd5f5;
+    margin-bottom: 6px;
+    display: block;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    background: rgba(0, 0, 0, 0.35);
+    color: #fff;
+    outline: none;
+}
+
+.input-group input:focus {
+    border-color: #38bdf8;
+}
+
+/* BUTTON */
+.btn-export {
+    margin-top: 10px;
+    padding: 14px;
+    border-radius: 14px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    background: linear-gradient(135deg, #ef4444, #f97316);
+    color: white;
+    transition: all 0.3s ease;
+}
+
+.btn-export i {
+    margin-right: 8px;
+}
+
+.btn-export:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(239, 68, 68, 0.5);
+}
+
+/* BACK LINK */
+.back-link {
+    margin-top: 25px;
+}
+
+.back-link a {
+    text-decoration: none;
+    color: #38bdf8;
+    font-size: 14px;
+}
+
+/* ===============================
+   PDF PREVIEW
+================================ */
+
+.pdf-preview-box {
+    width: 100%;
+    height: 500px;
+    margin-bottom: 20px;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.pdf-preview-box iframe {
+    width: 100%;
+    height: 100%;
+    background: white;
+}
+
+/* ===============================
+   ANALYTICS DASHBOARD
+================================ */
+canvas {
+    width: 100% !important;
+    max-height: 280px;
+}
+
+/* ===============================
+   MOBILE RESPONSIVE (UX IMPROVEMENTS)
+================================ */
+@media (max-width: 768px) {
+
+    .container {
+        margin: 20px auto;
+        padding: 18px;
+        border-radius: 14px;
+    }
+
+    h1 {
+        font-size: 22px;
+    }
+
+    .welcome {
+        font-size: 14px;
+        margin-bottom: 20px;
+    }
+
+    /* ✅ Summary cards: 1 column */
+    .summary-cards {
+        flex-direction: column;
+        gap: 14px;
+    }
+
+    .summary-card {
+        min-width: 100%;
+        padding: 18px;
+    }
+
+    .summary-card h1 {
+        font-size: 24px;
+    }
+
+    /* ✅ Actions grid: 1 column */
+    .actions {
+        grid-template-columns: 1fr;
+        gap: 14px;
+    }
+
+    .action-card {
+        padding: 20px;
+        border-radius: 14px;
+    }
+
+    .action-icon {
+        font-size: 26px;
+    }
+
+    .action-card a,
+    .logout a {
+        display: inline-block;
+        padding: 10px 12px;
+    }
+
+    /* ✅ Logout */
+    .logout {
+        text-align: center;
+        margin-top: 25px;
+    }
+}
+
+input,
+select {
+    width: 100%;
+    padding: 12px;
+    border-radius: 12px;
+    border: 1px solid #374151;
+    background: #111827;
+    color: white;
+    font-size: 15px;
+    box-sizing: border-box;
+}
+
+input:focus,
+select:focus {
+    outline: none;
+    border-color: #60a5fa;
+}
+.currency-select{
+  width:auto !important;
+}

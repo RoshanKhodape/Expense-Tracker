@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Date Filter Expenses</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #0f172a;
+            /* dark navy black */
+            color: #e5e7eb;
+            margin: 0;
+            padding: 0;
+        }
+
+
+        .container {
+            max-width: 1000px;
+            margin: 60px auto;
+            background: #111827;
+            /* dark card */
+            padding: 30px;
+            border-radius: 14px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+        }
+
+
+        h2 {
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-bottom: 25px;
+        }
+
+        input[type="date"] {
+            padding: 8px;
+            font-size: 15px;
+        }
+
+        button {
+            padding: 8px 18px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            border-radius: 10px;
+            overflow: hidden;
+            background: #020617;
+        }
+
+        thead {
+            background: #1e293b;
+            color: #e5e7eb;
+        }
+
+        tbody tr:nth-child(even) {
+            background: #020617;
+        }
+
+        tbody tr:hover {
+            background: #1e293b;
+        }
+
+
+        .total {
+            margin-top: 15px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            text-decoration: none;
+            color: #007bff;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h2>📅 Filter Expenses by Date</h2>
+
+        <form method="POST">
+            <label>From:
+                <input type="date" name="from_date" required value="{{ from_date }}">
+            </label>
+
+            <label>To:
+                <input type="date" name="to_date" required value="{{ to_date }}">
+            </label>
+
+            <button type="submit">Filter</button>
+        </form>
+
+        {% if expenses %}
+        <table>
+            <tr>
+                <th>Date</th>
+                <th>Amount (₹)</th>
+                <th>Category</th>
+                <th>Note</th>
+            </tr>
+
+            {% for e in expenses %}
+            <tr>
+                <td>{{ e.date }}</td>
+                <td>{{ e.amount }}</td>
+                <td>{{ e.category }}</td>
+                <td>{{ e.note }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+
+        <div class="total">Total Amount: {{ currency_symbol }} {{ total }}</div>
+        {% elif from_date %}
+        <p style="color:red;">No expenses found for selected dates.</p>
+        {% endif %}
+
+        <a href="/">⬅ Back to Dashboard</a>
+    </div>
+
+</body>
+
+</html>

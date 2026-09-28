@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analytics</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>📊 Advanced Analytics</h1>
+        <p class="welcome">Your spending insights in one place ✅</p>
+
+        <!-- ✅ Month Selector -->
+        <div style="margin:18px 0;">
+            <form method="GET" action="/analytics">
+                <label style="font-weight:600; color:#cbd5f5;">📅 Select Month:</label>
+
+                <select name="month" onchange="this.form.submit()"
+                    style="padding:10px 12px; border-radius:10px; margin-left:10px; background:#111827; color:white; border:1px solid #374151;">
+
+                    <option value="all" {% if selected_month=="all" %}selected{% endif %}>
+                        All Months
+                    </option>
+
+                    {% for m in months_list %}
+                    <option value="{{ m }}" {% if selected_month==m %}selected{% endif %}>
+                        {{ m }}
+                    </option>
+                    {% endfor %}
+
+                </select>
+            </form>
+        </div>
+
+        {% if months|length == 0 %}
+        <div class="flash-error">
+            No expense data found for selected month ❌
+        </div>
+        {% endif %}
+
+        <!-- ✅ Stats Cards -->
+        <div class="summary-cards">
+            <div class="summary-card blue">
+                <h3>💰 Total Expense</h3>
+                <h1>{{ currency_symbol }} {{ overall_total }}</h1>
+            </div>
+
+            <div class="summary-card green">
+                <h3>📅 Avg Daily Spend</h3>
+                <h1>{{ currency_symbol }} {{ avg_daily }}</h1>
+            </div>
+
+            <div class="summary-card orange">
+                <h3>🏆 Top Category</h3>
+                <h1>{{ top_cat_name }}</h1>
+                <p style="margin:0; font-size:14px; color:#cbd5f5;">{{ currency_symbol }} {{ top_cat_amount }}</p>
+            </div>
+        </div>
+
+        <div class="summary-cards">
+            <div class="summary-card" style="width:100%;">
+                <h3>📌 Highest Expense Day</h3>
+                <h1>{{ highest_day }} — {{ currency_symbol }} {{ highest_day_amount }}</h1>
+            </div>
+        </div>
+
+        <!-- ✅ Charts -->
+        <div class="actions">
+
+            <div class="action-card" style="grid-column: span 2;">
+                <h3 style="margin-bottom:15px;">📈 Monthly Spending Trend</h3>
+                <canvas id="monthlyChart"></canvas>
+            </div>
+
+            <div class="action-card">
+                <h3 style="margin-bottom:15px;">📊 Top Categories</h3>
+                <canvas id="categoryChart"></canvas>
+            </div>
+
+        </div>
+
+        <div class="back-link" style="margin-top:25px;">
+            <a href="/">⬅ Back to Dashboard</a>
+        </div>
+
+    </div>
+
+
+    <script>
+        const months = {{ months| tojson }};
+        const monthlyTotals = {{ monthly_totals| tojson }};
+
+        const ctx1 = document.getElementById("monthlyChart").getContext("2d");
+        new Chart(ctx1, {
+            type: "line",
+            data: {
+                labels: months,
+                datasets: [{
+                    label: "Expense",
+                    data: monthlyTotals,
+                    tension: 0.4,
+                    borderWidth: 2
+                }]
+            }
+        });
+
+        const categories = {{ categories| tojson }};
+        const categoryTotals = {{ category_totals| tojson }};
+
+        const ctx2 = document.getElementById("categoryChart").getContext("2d");
+        new Chart(ctx2, {
+            type: "bar",
+            data: {
+                labels: categories,
+                datasets: [{
+                    label: "Top Categories Expense",
+                    data: categoryTotals,
+                    borderWidth: 1
+                }]
+            }
+        });
+    </script>
+
+</body>
+
+</html>

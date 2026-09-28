@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Tracker Dashboard</title>
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    {% for category, message in messages %}
+    <div class="{{ 'flash-success' if category=='success' else 'flash-error' }}">
+        {{ message }}
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+
+    <div class="container">
+
+        <!-- ✅ Top Bar -->
+        <div style="display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap;">
+            <h1 style="margin:0;">💰 Expense Tracker</h1>
+
+            <div style="display:flex; gap:12px; align-items:center; flex-wrap:wrap;">
+
+                <!-- ✅ Currency Selector (MUST be inside body) -->
+                <form action="/set-currency" method="POST" style="margin:0;">
+                    <select name="currency" onchange="this.form.submit()"
+                        style="padding:8px 12px; border-radius:10px; background:#111827; color:white; border:1px solid #374151;">
+                        <option value="INR" {% if currency_code=="INR" %}selected{% endif %}>₹ INR</option>
+                        <option value="USD" {% if currency_code=="USD" %}selected{% endif %}>$ USD</option>
+                        <option value="EUR" {% if currency_code=="EUR" %}selected{% endif %}>€ EUR</option>
+                        <option value="GBP" {% if currency_code=="GBP" %}selected{% endif %}>£ GBP</option>
+                    </select>
+                </form>
+            </div>
+        </div>
+
+        <hr style="border:0; height:1px; background:#374151; margin:18px 0;">
+
+        <p class="welcome">Welcome, <strong>{{ username }}</strong> 👋</p>
+
+        <!-- SUMMARY -->
+        <div class="summary-cards">
+            <div class="summary-card blue">
+                <h3>📅 This Month Expense</h3>
+                <h1>{{ currency_symbol }} {{ monthly_total }}</h1>
+            </div>
+
+            <div class="summary-card green">
+                <h3>💰 Overall Expense</h3>
+                <h1>{{ currency_symbol }} {{ overall_total }}</h1>
+            </div>
+
+            <div class="summary-card orange">
+                <h3>🧾 Total Transactions</h3>
+                <h1>{{ total_transactions }}</h1>
+            </div>
+        </div>
+
+        <!-- ACTIONS -->
+        <div class="actions">
+            <div class="action-card">
+                <div class="action-icon">👤</div>
+                <a href="/profile">Profile</a>
+            </div>
+
+            <div class="action-card">
+                <div class="action-icon">➕</div>
+                <a href="/add">Add Expense</a>
+            </div>
+
+            <div class="action-card">
+                <div class="action-icon">📄</div>
+                <a href="/view">View Expenses</a>
+            </div>
+            <div class="action-card">
+                <div class="action-icon">🧾</div>
+                <a href="/categories">Manage Categories</a>
+            </div>
+
+            <div class="action-card">
+                <div class="action-icon">📊</div>
+                <a href="/analytics">Analytics</a>
+            </div>
+
+            <div class="action-card">
+                <div class="action-icon">📊</div>
+                <a href="/chart">Monthly Chart</a>
+            </div>
+
+            <div class="action-card">
+                <div class="action-icon">📊</div>
+                <a href="/category-chart">Category Chart</a>
+            </div>
+
+            <div class="action-card">
+                <div class="action-icon">📅</div>
+                <a href="/filter">Date Filter</a>
+            </div>
+
+            <div class="action-card">
+                <div class="action-icon">📁</div>
+                <a href="/export-csv">Export CSV</a>
+            </div>
+
+            <div class="action-card">
+                <div class="action-icon">📄</div>
+                <a href="/export-pdf">Export PDF</a>
+            </div>
+
+            <div class="action-card">
+                <div class="action-icon">📅</div>
+                <a href="/export-pdf-range">Export PDF (Date Range)</a>
+            </div>
+            <div class="action-card">
+                <div class="action-icon">📦</div>
+                <a href="/backup">Backup</a>
+            </div>
+
+            <div class="action-card">
+                <div class="action-icon">♻️</div>
+                <a href="/restore">Restore</a>
+            </div>
+
+        </div>
+
+
+        <div class="logout">
+            🚪 <a href="/logout">Logout</a>
+        </div>
+
+    </div>
+
+    <!-- ✅ Floating Add Button -->
+    <a href="/add" style="
+    position:fixed;
+    bottom:20px;
+    right:20px;
+    background:#34d399;
+    color:#111827;
+    font-weight:800;
+    border-radius:50%;
+    width:54px;
+    height:54px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-decoration:none;
+    font-size:24px;
+    box-shadow:0 10px 25px rgba(0,0,0,0.4);
+    z-index:999;
+    ">+</a>
+
+    <footer class="footer">
+        © 2026 Expense Tracker • Built with Flask ❤️
+    </footer>
+
+</body>
+
+</html>

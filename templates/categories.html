@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Categories</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <div class="container" style="max-width:800px;">
+
+        <h1>🧾 Manage Categories</h1>
+        <p class="welcome">Add / edit / delete your expense categories ✅</p>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        {% for category, message in messages %}
+        <div class="{{ 'flash-success' if category=='success' else 'flash-error' }}">
+            {{ message }}
+        </div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+
+        <!-- ✅ ADD CATEGORY -->
+        <form method="POST" style="margin-bottom:25px;">
+            <input type="text" name="name" placeholder="Enter category name..." required>
+            <button type="submit" class="btn-export" style="margin-top:12px;">➕ Add Category</button>
+        </form>
+
+        <hr style="border:0; height:1px; background:#374151; margin:20px 0;">
+
+        <!-- ✅ CATEGORY LIST -->
+        <h3>Your Categories:</h3>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Category</th>
+                    <th style="width:150px;">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for c in categories %}
+                <tr>
+                    <td>{{ c.name }}</td>
+                    <td>
+                        <a class="action-edit" href="/categories/edit/{{ c.id }}">✏️</a>
+                        &nbsp;&nbsp;
+                        <a class="action-delete" href="/categories/delete/{{ c.id }}"
+                            onclick="return confirm('Delete this category?')">🗑️</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <div class="back-link">
+            <a href="/">⬅ Back to Dashboard</a>
+        </div>
+
+    </div>
+
+</body>
+
+</html>
